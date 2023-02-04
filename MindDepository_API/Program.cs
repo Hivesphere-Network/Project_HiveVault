@@ -1,4 +1,4 @@
-using static MindDepository.API.GraphDbApi;
+using static MindDepository_API.API.GraphDbApi;
 
 var builder = WebApplication.CreateBuilder(args);
 

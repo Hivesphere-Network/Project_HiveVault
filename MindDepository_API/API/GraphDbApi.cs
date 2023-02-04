@@ -1,5 +1,4 @@
-﻿namespace MindDepository.API;
-
+﻿namespace MindDepository_API.API;
 public static class GraphDbApi
 {
     public static void ConfigureApi(this WebApplication app)
@@ -12,6 +11,4 @@ public static class GraphDbApi
         //var result = await session.RunAsync("MATCH p=()-[:ACTED_IN]->() RETURN p LIMIT 25;");
         return Results.Ok();
     }
-    
-    
 }
