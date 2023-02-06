@@ -13,4 +13,5 @@ public class UserProfileModel
     public string LastName { get; set; }
     public string Email { get; set; }
     public string AccessLevel { get; set; }
+    public string Avatar { get; set; }
 }
