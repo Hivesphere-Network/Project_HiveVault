@@ -1,0 +1,21 @@
+using static MindDepository_API.API.GraphDbApi;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.ConfigureApi();
+
+app.UseHttpsRedirection();
+
+app.Run();

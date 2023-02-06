@@ -1,4 +1,9 @@
 ﻿/.idea/
 /.vs/
-/MindDepository/obj/
-/MindDepository/bin/
+/MindDepository_API/obj/
+/MindDepository_API/bin/
+/MindDepository_API.sln.DotSettings.user
+/DataAccessLayer/obj/
+/DataAccessLayer/bin/
+/DataAccessLayer.sln.DotSettings.usergit
+/SqlDB/obj/
