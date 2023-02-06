@@ -3,10 +3,10 @@ using System.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
 
-namespace DataAccessLayer.Sql.SqlAccess
-{
+namespace DataAccessLayer.Sql.SqlAccess;
+
     public class SqlDataAccess : ISqlDataAccess
-    {
+    { 
         private readonly IConfiguration _config;
 
         public SqlDataAccess(IConfiguration config)
@@ -14,9 +14,9 @@ namespace DataAccessLayer.Sql.SqlAccess
             _config = config;
         }
 
-        public async Task<IEnumerable<T>> LoadData<T, U>(
+        public async Task<IEnumerable<T>> LoadDataAsync<T, TU>(
             string storedProcedure,
-            U parameters,
+            TU parameters,
             string connectionId = "Default")
         {
             using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Sql.SqlAccess
                 commandType: CommandType.StoredProcedure);
         }
 
-        public async Task SaveData<T>(
+        public async Task SaveDataAsync<T>(
             string storedProcedure,
             T parameters,
             string connectionId = "Default")
@@ -36,4 +36,3 @@ namespace DataAccessLayer.Sql.SqlAccess
                 commandType: CommandType.StoredProcedure);
         }
     }
-}
