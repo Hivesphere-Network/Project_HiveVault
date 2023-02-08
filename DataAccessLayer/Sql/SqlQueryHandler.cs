@@ -21,17 +21,6 @@ public class SqlQueryHandler : ISqlQueryHandler
         var Result = dbConnection.QueryAsync(query, parameters);
         return Result;
     }
-    
-    public async Task<IEnumerable<T>>
-        LoadData<T, U>(string storedProcedure, U parameters,
-            string connectionId = "Default")
-    {
-        using IDbConnection connection =
-            new SqlConnection(_config.GetConnectionString(connectionId));
-
-        return await connection.QueryAsync<T>(
-            storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-    }
 
     public async Task<IEnumerable<T>> LoadDataAsync<T, TU>(
         string storedProcedure,
