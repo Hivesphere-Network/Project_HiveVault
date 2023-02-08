@@ -7,5 +7,7 @@ public static class HealthApi
         app.MapGet("/api/health", HealthCheckAsync).WithName("HealthCheck");
     }
 
-    private static async Task<IResult> HealthCheckAsync() { return Results.Ok(); }
+    private static async Task<IResult> HealthCheckAsync() {
+        return Results.Ok();
+    }
 }
