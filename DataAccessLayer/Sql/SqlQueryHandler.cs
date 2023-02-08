@@ -30,7 +30,7 @@ public class SqlQueryHandler : ISqlQueryHandler
         using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
 
         return await connection.QueryAsync<T>(storedProcedure, parameters,
-            commandType: CommandType.StoredProcedure);
+                                              commandType: CommandType.StoredProcedure);
     }
 
     public async Task SaveDataAsync<T>(
@@ -41,6 +41,6 @@ public class SqlQueryHandler : ISqlQueryHandler
         using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
 
         await connection.ExecuteAsync(storedProcedure, parameters,
-            commandType: CommandType.StoredProcedure);
+                                      commandType: CommandType.StoredProcedure);
     }
 }
