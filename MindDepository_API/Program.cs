@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureGraphApi();
 app.ConfigureApi();
 
 app.UseHttpsRedirection();
