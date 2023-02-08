@@ -13,15 +13,15 @@ public class SqlQueryHandler : ISqlQueryHandler
     {
         this._config = _config;
     }
-    
+
     public Task ExecuteAsync<T>(string query, T parameters, string connectionId = "Sql")
     {
         using IDbConnection dbConnection = new SqlConnection(_config.GetConnectionString(connectionId));
-        
+
         var Result = dbConnection.QueryAsync(query, parameters);
         return Result;
     }
-    
+
     public async Task<IEnumerable<T>>
         LoadData<T, U>(string storedProcedure, U parameters,
             string connectionId = "Default")
