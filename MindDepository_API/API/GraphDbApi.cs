@@ -4,7 +4,7 @@ public static class GraphDbApi
     public static void ConfigureGraphApi(this WebApplication app)
     {
         app.MapGet("/api/graph/test", TestConnectionAsync)
-            .WithName("GraphConnectionTest");
+        .WithName("GraphConnectionTest");
     }
 
     private static async Task<IResult> TestConnectionAsync()

@@ -3,7 +3,7 @@
 public class NoSqlQueryHandler : INoSqlQueryHandler
 {
     public Task<IEnumerable<T>> LoadDataAsync<T, U>(string collectionName,
-                                                    U parameters)
+            U parameters)
     {
         throw new NotImplementedException();
     }
