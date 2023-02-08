@@ -1,9 +1,13 @@
-using static MindDepository_API.API.GraphDbApi;
+using DataAccessLayer.NoSql;
+using DataAccessLayer.Sql;
+using MindDepository_API.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ISqlQueryHandler, SqlQueryHandler>();
+builder.Services.AddSingleton<INoSqlQueryHandler, NoSqlQueryHandler>();
 
 var app = builder.Build();
 
