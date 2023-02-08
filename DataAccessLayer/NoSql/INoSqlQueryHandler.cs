@@ -1,8 +1,8 @@
-﻿namespace DataAccessLayer.NoSql.NoSqlAccess;
+﻿namespace DataAccessLayer.NoSql;
 
 // MongoDB Access
 
-public interface INoSqlAccess
+public interface INoSqlQueryHandler
 {
     Task<IEnumerable<T>> LoadDataAsync<T, U>(string collectionName, U parameters);
     Task SaveDataAsync<T>(string collectionName, T parameters);
