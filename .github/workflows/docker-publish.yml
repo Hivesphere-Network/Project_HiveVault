@@ -41,9 +41,9 @@ jobs :
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: |
-            pramudithapothuwila/minddepository
-            ghcr.io/${{ github.repository }}
+          images: ghcr.io/${{ github.repository }}
+                  pramudithapothuwila/minddepository
+            
 
       - name: Build and push
         id: docker_build
