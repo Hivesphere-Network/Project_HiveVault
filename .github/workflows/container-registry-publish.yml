@@ -33,7 +33,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=0.1.${{ github.run_number }},priority=1000
-            type=ref,value=branch
+            type=ref,event=branch
             type=raw,value=latest
 
       - name: Build and push Docker image
