@@ -7,3 +7,5 @@
 /DataAccessLayer/bin/
 /DataAccessLayer.sln.DotSettings.usergit
 /SqlDB/obj/
+/SqlDB/bin/
+*.dbmdl
