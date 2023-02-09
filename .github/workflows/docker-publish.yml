@@ -31,7 +31,7 @@ jobs :
         with:
           images: ${{ env.REGISTRY }}/pramudithapothuwila/minddepository
                   pramudithapothuwila/minddepository
-          tags: |
+          tags:
             type=raw,value=1.0.${{ github.run_number }},priority=1000
             type=ref,event=branch
             type=sha
@@ -65,7 +65,7 @@ jobs :
           platforms: linux/amd64
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/minddepository:latest
-                ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
+                ${{ needs.get-tags.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
