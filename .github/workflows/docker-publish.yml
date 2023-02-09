@@ -65,7 +65,7 @@ jobs :
           platforms: linux/amd64
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/minddepository:latest
-                ${{ steps.meta.outputs.tags }}
+                ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
