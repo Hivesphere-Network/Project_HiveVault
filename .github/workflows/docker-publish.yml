@@ -1,71 +1,41 @@
-name : Docker
+name: Create and publish a Docker image
 
-on :
-  push :
-    branches :
-      - dev
-      - qa
-
-  pull_request:
-    branches :
-      - dev
-      - qa
+on:
+  push:
+    branches: ['dev']
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-jobs :
-  docker:
+jobs:
+  build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
-      packages: write
       contents: read
+      packages: write
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/pramudithapothuwila/minddepository
-                  pramudithapothuwila/minddepository
-          tags:
-            type=raw,value=1.0.${{ github.run_number }},priority=1000
-            type=ref,event=branch
-            type=sha
-            type=raw,value=latest,priority=100
-      
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESSTOKEN }}
-
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push
-        id: docker_build
+      - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/minddepository:latest
-                ${{ env.REGISTRY }}/pramudithapothuwila/minddepository:${{ needs.get-tags.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
