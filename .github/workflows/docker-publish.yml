@@ -11,6 +11,10 @@ on :
       - dev
       - qa
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs :
   docker:
     runs-on: ubuntu-latest
@@ -44,7 +48,7 @@ jobs :
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
                   pramudithapothuwila/minddepository
             
 
@@ -59,3 +63,5 @@ jobs :
           tags: ${{ secrets.DOCKER_USERNAME }}/minddepository:latest
                 ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
