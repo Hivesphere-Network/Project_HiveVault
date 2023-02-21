@@ -9,19 +9,19 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 COPY *.sln ./
-COPY ./MindDepository_API/*.csproj ./MindDepository_API/
+COPY ./HiveVault_API/*.csproj ./HiveVault_API/
 COPY ./DataAccessLayer/*.csproj ./DataAccessLayer/
 COPY ./SqlDB/*.sqlproj ./SqlDB/
 RUN dotnet restore
 
 COPY . .
-WORKDIR "/src/MindDepository_API"
-RUN dotnet build "MindDepository_API.csproj" -c Release -o /app/build
+WORKDIR "/src/HiveVault_API"
+RUN dotnet build "HiveVault_API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MindDepository_API.csproj" -c Release -o /app/publish
+RUN dotnet publish "HiveVault_API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MindDepository_API.dll"]
+ENTRYPOINT ["dotnet", "HiveVault_API.dll"]
