@@ -1,10 +1,10 @@
-﻿namespace MindDepository_API.API;
+﻿namespace HiveVault_API.API;
+
 public static class GraphDbApi
 {
     public static void ConfigureGraphApi(this WebApplication app)
     {
-        app.MapGet("/api/graph/test", TestConnectionAsync)
-            .WithName("GraphConnectionTest");
+        app.MapGet("/api/graph/test", TestConnectionAsync).WithName("GraphConnectionTest");
     }
 
     private static async Task<IResult> TestConnectionAsync()

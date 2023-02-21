@@ -1,6 +1,6 @@
 using DataAccessLayer.NoSql;
 using DataAccessLayer.Sql;
-using MindDepository_API.API;
+using HiveVault_API.API;
 
 var builder = WebApplication.CreateBuilder(args);
 

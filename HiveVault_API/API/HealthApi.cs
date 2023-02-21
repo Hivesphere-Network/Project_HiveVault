@@ -1,4 +1,4 @@
-﻿namespace MindDepository_API.API;
+﻿namespace HiveVault_API.API;
 
 public static class HealthApi
 {

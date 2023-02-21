@@ -6,8 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>0d60036e-ccf2-4efa-ab5e-f2d59ddc021c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <AssemblyName>MindDepository_API</AssemblyName>
-    <RootNamespace>MindDepository_API</RootNamespace>
+    <AssemblyName>HiveVault_API</AssemblyName>
+    <RootNamespace>HiveVault_API</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
