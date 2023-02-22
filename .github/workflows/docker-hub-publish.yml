@@ -1,4 +1,4 @@
-name: Create and publish a Docker image to Docker
+name: Docker Hub Container Image Library Image Build
 
 on:
   push:
