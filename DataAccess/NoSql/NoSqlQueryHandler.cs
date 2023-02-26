@@ -1,7 +1,10 @@
-﻿namespace DataAccessLayer.NoSql;
+﻿namespace DataAccess.NoSql;
 
 public class NoSqlQueryHandler : INoSqlQueryHandler
 {
+    public NoSqlQueryHandler()
+    {
+    }
     public Task<IEnumerable<T>> LoadDataAsync<T, U>(string collectionName,
                                                     U parameters)
     {

@@ -1,4 +1,4 @@
-﻿namespace HiveVault_API.API;
+﻿namespace HiveVaultService.API;
 
 public static class HealthApi
 {

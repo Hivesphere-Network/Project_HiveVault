@@ -1,8 +1,5 @@
-using DataAccessLayer.NoSql;
-using DataAccessLayer.Sql;
-using HiveVault_API.API;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using DataAccess.NoSql;
+using DataAccess.Sql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +17,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.ConfigureGraphApi();
-app.ConfigureApi();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

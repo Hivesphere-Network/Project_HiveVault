@@ -1,6 +1,5 @@
-﻿namespace DataAccessLayer.NoSql;
+﻿namespace DataAccess.NoSql;
 
-// MongoDB Access
 
 public interface INoSqlQueryHandler
 {

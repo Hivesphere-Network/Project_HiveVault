@@ -1,9 +1,9 @@
 ﻿/.idea/
 /.vs/
-/HiveVault_API/obj/
-/HiveVault_API/bin/
-HiveVault_API/.idea/
-/HiveVault_API.sln.DotSettings.user
+/HiveVaultService/obj/
+/HiveVaultService/bin/
+HiveVaultService/.idea/
+/HiveVaultService.sln.DotSettings.user
 /DataAccess/obj/
 /DataAccess/bin/
 /DataAccess.sln.DotSettings.usergit
@@ -11,5 +11,5 @@ HiveVault_API/.idea/
 /SqlDB/bin/
 *.dbmdl
 Project_HiveVault.sln.DotSettings.user
-HiveVault_API/HiveVault_API.csproj.user
+HiveVaultService/HiveVault_API.csproj.user
 /OpenApi/
