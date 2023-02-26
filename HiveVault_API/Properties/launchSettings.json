@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "MindDepository": {
+    "HiveVault": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
