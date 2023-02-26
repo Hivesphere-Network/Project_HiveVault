@@ -9,19 +9,18 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 COPY *.sln ./
-COPY ./HiveVault_API/*.csproj ./HiveVault_API/
-COPY ./DataAccessLayer/*.csproj ./DataAccessLayer/
-COPY ./SqlDB/*.sqlproj ./SqlDB/
+COPY ./HiveVaultService/*.csproj ./HiveVaultService/
+COPY ./DataAccess/*.csproj ./DataAccess/
 RUN dotnet restore
 
 COPY . .
 WORKDIR "/src/HiveVault_API"
-RUN dotnet build "HiveVault_API.csproj" -c Release -o /app/build
+RUN dotnet build "HiveVaultService.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "HiveVault_API.csproj" -c Release -o /app/publish
+RUN dotnet publish "HiveVaultService.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "HiveVault_API.dll"]
+ENTRYPOINT ["dotnet", "HiveVaultService.dll"]
