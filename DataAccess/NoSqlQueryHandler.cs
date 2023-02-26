@@ -1,4 +1,6 @@
-﻿namespace DataAccess.NoSql;
+﻿using DataAccess.Contracts;
+
+namespace DataAccess;
 
 public class NoSqlQueryHandler : INoSqlQueryHandler
 {

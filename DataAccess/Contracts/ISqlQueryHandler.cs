@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Sql;
+﻿namespace DataAccess.Contracts;
 
 public interface ISqlQueryHandler
 {

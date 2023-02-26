@@ -1,6 +1,7 @@
-﻿using Neo4j.Driver;
+﻿using DataAccess.Contracts;
+using Neo4j.Driver;
 
-namespace DataAccess.Graph;
+namespace DataAccess;
 
 public sealed class GraphQueryHandler : IGraphQueryHandler, IDisposable
 {

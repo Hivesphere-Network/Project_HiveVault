@@ -1,7 +1,5 @@
-using System.Text.RegularExpressions;
-using DataAccess.Graph;
-using DataAccess.NoSql;
-using DataAccess.Sql;
+using DataAccess.Contracts;
+using DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Graph;
+﻿namespace DataAccess.Contracts;
 
 public interface IGraphQueryHandler
 {
