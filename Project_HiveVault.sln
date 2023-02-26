@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HiveVaultService", "HiveVau
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{9222E41E-6264-4F39-B9F6-AEFCC634883B}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SqlDB", "SqlDB\SqlDB.sqlproj", "{C15AEFF5-CC6A-401C-9159-6180AC874EFE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +21,6 @@ Global
 		{9222E41E-6264-4F39-B9F6-AEFCC634883B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9222E41E-6264-4F39-B9F6-AEFCC634883B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9222E41E-6264-4F39-B9F6-AEFCC634883B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C15AEFF5-CC6A-401C-9159-6180AC874EFE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
