@@ -11,6 +11,7 @@ WORKDIR /src
 COPY *.sln ./
 COPY ./HiveVaultService/*.csproj ./HiveVaultService/
 COPY ./DataAccess/*.csproj ./DataAccess/
+COPY ./SqlDB/*.sqlproj ./SqlDB/
 RUN dotnet restore
 
 COPY . .
