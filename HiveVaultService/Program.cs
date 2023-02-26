@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+using DataAccess.Graph;
 using DataAccess.NoSql;
 using DataAccess.Sql;
 
@@ -8,6 +10,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ISqlQueryHandler, SqlQueryHandler>();
 builder.Services.AddSingleton<INoSqlQueryHandler, NoSqlQueryHandler>();
+builder.Services.AddSingleton<IGraphQueryHandler, GraphQueryHandler>();
 
 var app = builder.Build();
 
