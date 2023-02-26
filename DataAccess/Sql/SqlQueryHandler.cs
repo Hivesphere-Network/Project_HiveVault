@@ -38,6 +38,6 @@ public class SqlQueryHandler : ISqlQueryHandler
         using IDbConnection connection =
             new SqlConnection(_config.GetConnectionString(connectionId));
 
-        await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);   
+        await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
 }
