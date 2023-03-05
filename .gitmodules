@@ -1,3 +1,4 @@
 [submodule "HiveSphere-Shared"]
 	path = HiveSphere-Shared
 	url = https://github.com/PramudithaPothuwila/HiveSphere-Shared.git
+	branch = dev
