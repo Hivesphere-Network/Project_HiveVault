@@ -14,21 +14,23 @@ public class GraphRepo : IDisposable
         Driver = GraphDatabase.Driver("neo4j://localhost:7687", AuthTokens.Basic("neo4j", "mynewpass"));
     }
 
-    public async Task ExecuteAsync(string query)
+    public async Task<List<IRecord>> ExecuteAsync(string query)
     {
         await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
+        var result = new List<IRecord>();
         try
         {
-            var results = await session.ExecuteReadAsync(async tx =>
+            await session.ExecuteReadAsync(async tx =>
             {
-                var result = await tx.RunAsync(query);
-                return await result.ToListAsync();
+                result = await tx.RunAsync(query).Result.ToListAsync();
             });
         }
         catch(Exception e)
         {
             Console.WriteLine(e);
         }
+        
+        return result;
     }
 
     public void Dispose()
