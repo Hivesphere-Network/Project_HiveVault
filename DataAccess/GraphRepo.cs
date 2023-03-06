@@ -11,23 +11,17 @@ public class GraphRepo : IDisposable
 
     public GraphRepo()
     {
-        Driver = GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "FJSS4nPN4NZjwkv"));
+        Driver = GraphDatabase.Driver("neo4j://localhost:7687", AuthTokens.Basic("neo4j", "mynewpass"));
     }
 
-    public async Task ExecuteAsync(string query , string[] parameters)
+    public async Task ExecuteAsync(string query)
     {
-        await using var session = Driver.AsyncSession(builder => builder.WithDatabase("HiveVault"));
+        await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
         try
         {
-            Dictionary<string, string> paramObj = new Dictionary<string, string>();
-            foreach (var param in parameters)
-            {
-                paramObj.Add(param, param);
-            }
-
             var results = await session.ExecuteReadAsync(async tx =>
             {
-                var result = await tx.RunAsync(query, paramObj);
+                var result = await tx.RunAsync(query);
                 return await result.ToListAsync();
             });
         }
