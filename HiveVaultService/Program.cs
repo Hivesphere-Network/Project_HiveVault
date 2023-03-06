@@ -19,5 +19,6 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.MapGrpcService<HiveHandshakeService>();
+app.MapGrpcService<HiveGraphDataService>();
 
 app.Run();
