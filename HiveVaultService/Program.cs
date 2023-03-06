@@ -3,6 +3,8 @@ using DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration["serverID"] = Guid.NewGuid().ToString();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton<ISqlQueryHandler, SqlQueryHandler>();
 builder.Services.AddSingleton<INoSqlQueryHandler, NoSqlQueryHandler>();
