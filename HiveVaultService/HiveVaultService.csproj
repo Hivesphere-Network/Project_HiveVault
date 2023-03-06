@@ -31,11 +31,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\*.proto" GrpcServices="Server" />
+    <Protobuf Include="..\HiveSphere-Shared\Protos\*.proto" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services" />
+    <Protobuf Include="..\HiveSphere-Shared\Protos\HiveHandshake.proto">
+      <Link>HiveHandshake.proto</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CustomToolNamespace>Hive.Protocol</CustomToolNamespace>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
