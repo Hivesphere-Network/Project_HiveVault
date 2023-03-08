@@ -1,4 +1,4 @@
-﻿using Neo4j.Driver;
+﻿using Neo4j.Driver;z
 
 namespace DataAccess;
 
@@ -17,20 +17,25 @@ public class GraphRepo : IDisposable
     public async Task<List<IRecord>> ExecuteAsync(string query)
     {
         await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
-        var result = new List<IRecord>();
-        try
+        var Execute = await session.ExecuteReadAsync(async tx =>
         {
-            await session.ExecuteReadAsync(async tx =>
+            var result= await tx.RunAsync(query).Result.ToListAsync();
+            return result;
+        });
+        return Execute;
+    }
+
+    public async Task<IResultCursor> ExecuteWriteAsync(string query)
+    {
+        await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
+        var response = await session.ExecuteWriteAsync(async 
+            tx =>
             {
-                result = await tx.RunAsync(query).Result.ToListAsync();
+                var result = await tx.RunAsync(query);
+                return result;
             });
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        
-        return result;
+
+        return response;
     }
 
     public void Dispose()
@@ -40,7 +45,6 @@ public class GraphRepo : IDisposable
     }
 
     protected virtual void Dispose(bool disposing)
-
     {
         if (Disposed) return;
         if (disposing) Driver?.Dispose();

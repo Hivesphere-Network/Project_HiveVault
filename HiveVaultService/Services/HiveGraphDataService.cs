@@ -1,24 +1,39 @@
 using DataAccess;
 using Grpc.Core;
 using Hive.Protocol;
-using HiveVaultService.Handlers;
 using Neo4j.Driver;
 
 namespace HiveVaultService.Services;
 
 public class HiveGraphDataService : HiveGraphData.HiveGraphDataBase
 {
+    private readonly GraphRepo _repo = new();
+
     public override async Task<GetGraphResponse> GetGraphData(GetGraphRequest request, ServerCallContext context)
     {
-        var repo = new GraphRepo();
+        string[] array = request.Parameter.ToArray();
+        string query = string.Format(request.Query, array[0]);
 
-        List<IRecord> response = await repo.ExecuteAsync(request.Query);
+        var response = await _repo.ExecuteAsync(query);
 
-        var re = response.First()["node"].As<INode>().Properties["name"].As<string>();
-        
+        string? node = response.First()["node"].As<INode>().Properties["name"].As<string>();
+
         return await Task.FromResult(new GetGraphResponse
         {
-            Response = re
+            Response = node
+        });
+    }
+
+    public override async Task<WriteGraphResponse> WriteGraphData(WriteGraphRequest request, ServerCallContext context)
+    {
+        string[] array = request.Parameter.ToArray();
+        string query = string.Format(request.Query, array[0]);
+
+        var response = await _repo.ExecuteWriteAsync(query);
+
+        return await Task.FromResult(new WriteGraphResponse
+        {
+            Response = response.ConsumeAsync().Result.ToString()
         });
     }
 }
