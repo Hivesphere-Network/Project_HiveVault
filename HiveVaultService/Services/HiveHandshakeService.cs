@@ -15,7 +15,7 @@ public class HiveHandshakeService : HiveHandshake.HiveHandshakeBase
     public override Task<HandshakeResponse> Handshake(HandshakeRequest request, ServerCallContext context)
     {
         string requestId = HandshakeTokens.GetToken();
-        GraphRepo repo = new GraphRepo();
+        GraphRepo repo = new();
         var sting = repo.ExecuteAsync("MATCH (n) RETURN n AS node");
         return Task.FromResult(new HandshakeResponse
         {
