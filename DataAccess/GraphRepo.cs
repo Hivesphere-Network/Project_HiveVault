@@ -6,7 +6,7 @@ public class GraphRepo : IDisposable
 {
     private bool Disposed = false;
     private IDriver Driver;
-    
+
     ~GraphRepo() => Dispose(false);
 
     public GraphRepo()
@@ -19,7 +19,7 @@ public class GraphRepo : IDisposable
         await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
         var Execute = await session.ExecuteReadAsync(async tx =>
         {
-            var result= await tx.RunAsync(query).Result.ToListAsync();
+            var result = await tx.RunAsync(query).Result.ToListAsync();
             return result;
         });
         return Execute;
@@ -28,7 +28,7 @@ public class GraphRepo : IDisposable
     public async Task<IResultCursor> ExecuteWriteAsync(string query)
     {
         await using var session = Driver.AsyncSession(builder => builder.WithDatabase("neo4j"));
-        var response = await session.ExecuteWriteAsync(async 
+        var response = await session.ExecuteWriteAsync(async
             tx =>
             {
                 var result = await tx.RunAsync(query);

@@ -14,7 +14,7 @@ public class HiveGraphDataService : HiveGraphData.HiveGraphDataBase
         Console.WriteLine(request.Parameter);
         string[] array = request.Parameter.ToArray();
         string query = string.Format(request.Query, array);
-        
+
         var response = await _repo.ExecuteAsync(query);
 
         string? node = response.First()["node"].As<INode>().Properties["name"].As<string>();

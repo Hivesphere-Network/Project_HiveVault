@@ -16,12 +16,12 @@ public class GraphQueryHandler : IGraphQueryHandler
         Driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
         _session = Driver.AsyncSession();
     }
-    
+
     public void ExecuteQuery(string query)
     {
         _session?.RunAsync(query);
     }
-    
+
     public string? ExecuteQueryWithReturn(string query)
     {
         var result = _session?.RunAsync(query);
