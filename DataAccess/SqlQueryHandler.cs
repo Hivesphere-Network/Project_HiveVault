@@ -1,9 +1,10 @@
 ﻿using System.Data;
 using Dapper;
+using DataAccess.Contracts;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace DataAccess.Sql;
+namespace DataAccess;
 
 public class SqlQueryHandler : ISqlQueryHandler
 {
