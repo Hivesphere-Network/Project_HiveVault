@@ -20,5 +20,6 @@ app.UseHttpsRedirection();
 
 app.MapGrpcService<HiveHandshakeService>();
 app.MapGrpcService<HiveGraphDataService>();
+app.MapGrpcService<HiveNoSqlDataService>();
 
 app.Run();
