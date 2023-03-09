@@ -28,7 +28,7 @@ public class NoSqlQueryHandler : INoSqlQueryHandler
         await collection.InsertOneAsync(document);
     }
 
-    private IMongoDatabase? ConnectToServer()
+    private static IMongoDatabase? ConnectToServer()
     {
         MongoClient client = new(ConnectionString);
         var database = client.GetDatabase("HiveVault");
