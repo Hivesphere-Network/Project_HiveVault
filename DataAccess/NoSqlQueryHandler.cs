@@ -1,20 +1,37 @@
 ﻿using DataAccess.Contracts;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace DataAccess;
 
 public class NoSqlQueryHandler : INoSqlQueryHandler
 {
+    private const string ConnectionString = "mongodb://localhost:27017";
+    private static IMongoDatabase? _database;
     public NoSqlQueryHandler()
     {
-    }
-    public Task<IEnumerable<T>> LoadDataAsync<T, U>(string collectionName,
-                                                    U parameters)
-    {
-        throw new NotImplementedException();
+        _database = ConnectToServer();
     }
 
-    public Task SaveDataAsync<T>(string collectionName, T parameters)
+    public List<BsonDocument> LoadDataAsync(string collectionName, string searchKeyParameter, string searchKey)
     {
-        throw new NotImplementedException();
+        var collection = _database.GetCollection<BsonDocument>(collectionName);
+        
+        var filter = Builders<BsonDocument>.Filter.Eq(searchKeyParameter, searchKey);
+
+        return collection.FindAsync(filter).Result.ToList(); 
+    }
+
+    public async Task SaveDataAsync(string collectionName, BsonDocument document)
+    {
+        var collection = _database.GetCollection<BsonDocument>(collectionName);
+        await collection.InsertOneAsync(document);
+    }
+
+    private IMongoDatabase? ConnectToServer()
+    {
+        MongoClient client = new(ConnectionString);
+        var database = client.GetDatabase("HiveVault");
+        return database;
     }
 }
