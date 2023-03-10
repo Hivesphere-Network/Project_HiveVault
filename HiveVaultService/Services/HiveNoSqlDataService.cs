@@ -7,7 +7,7 @@ namespace HiveVaultService.Services;
 
 public class HiveNoSqlDataService : HiveNoSqlData.HiveNoSqlDataBase
 {
-    private INoSqlQueryHandler _repo = new NoSqlQueryHandler();
+    private readonly INoSqlQueryHandler _repo = new NoSqlQueryHandler();
     public override async Task<NosqlDataResponse> GetNoSqlData(NosqlDataRequest request, ServerCallContext context)
     {
         var response = _repo.LoadDataAsync(request.Collection, request.Key, request.Value);
