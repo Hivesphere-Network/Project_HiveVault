@@ -1,8 +1,9 @@
 ﻿/.idea/
 /.vs/
+/.vscode/
 /HiveVaultService/obj/
 /HiveVaultService/bin/
-HiveVaultService/.idea/
+/HiveVaultService/.idea/
 /HiveVaultService.sln.DotSettings.user
 /DataAccess/obj/
 /DataAccess/bin/
