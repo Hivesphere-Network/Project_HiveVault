@@ -1,4 +1,6 @@
-﻿using DataAccess.Contracts;
+﻿using System.Diagnostics;
+using System.Numerics;
+using DataAccess.Contracts;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -13,17 +15,20 @@ public class NoSqlQueryHandler : INoSqlQueryHandler
         _database = ConnectToServer();
     }
 
-    public List<BsonDocument> LoadDataAsync(string collectionName, string searchKeyParameter, string searchKey)
+    public List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, string> searchParameters)
     {
+        Debug.Assert(_database != null, nameof(_database) + " != null");
         var collection = _database.GetCollection<BsonDocument>(collectionName);
         
-        var filter = Builders<BsonDocument>.Filter.Eq(searchKeyParameter, searchKey);
+        var filter = searchParameters.Aggregate(FilterDefinition<BsonDocument>.Empty, (current, searchParameter) => current | Builders<BsonDocument>.Filter.Eq(searchParameter.Key, searchParameter.Value));
 
-        return collection.FindAsync(filter).Result.ToList(); 
+        var debug_string = collection.FindAsync(filter).Result.ToList();
+        return debug_string;
     }
 
     public async Task SaveDataAsync(string collectionName, BsonDocument document)
     {
+        Debug.Assert(_database != null, nameof(_database) + " != null");
         var collection = _database.GetCollection<BsonDocument>(collectionName);
         await collection.InsertOneAsync(document);
     }

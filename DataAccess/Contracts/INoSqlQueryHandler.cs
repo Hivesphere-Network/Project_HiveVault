@@ -5,6 +5,6 @@ namespace DataAccess.Contracts;
 
 public interface INoSqlQueryHandler
 {
-    List<BsonDocument> LoadDataAsync(string collectionName, string searchKeyParameter, string searchKey);
+    List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, string> searchParameters);
     Task SaveDataAsync(string collectionName, BsonDocument document);
 }
