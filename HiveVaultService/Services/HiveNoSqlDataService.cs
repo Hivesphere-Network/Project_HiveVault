@@ -1,5 +1,7 @@
+using System.Reflection.Metadata;
 using DataAccess;
 using DataAccess.Contracts;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Hive.Protocol;
 using MongoDB.Bson;
@@ -11,8 +13,25 @@ public class HiveNoSqlDataService : HiveNoSqlData.HiveNoSqlDataBase
     private readonly INoSqlQueryHandler _repo = new NoSqlQueryHandler();
     public override async Task<SingleDataReadResponse> GetSingleData(DataReadRequest request, ServerCallContext context)
     {
-        Dictionary<string, string> searchParameters = request.Key.ToList().ToDictionary(key => key, key => request.Value.ToArray()[request.Key.ToList().IndexOf(key)]);
-        var response = _repo.LoadDataAsync(request.Collection, searchParameters);
+        List<BsonDocument> response;
+        if (request.IntegerParameters.Capacity <= 0)
+        {
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, stringParameters);
+        }
+        else if (request.StringParameters.Capacity <= 0)
+        {
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, integerParameters);
+        }
+
+        else
+        {
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection,stringParameters, integerParameters);
+        }
+        
         return await Task.FromResult(new SingleDataReadResponse
         {
             Value = response.First().ToString()
@@ -21,11 +40,27 @@ public class HiveNoSqlDataService : HiveNoSqlData.HiveNoSqlDataBase
     
     public override async Task<MultiDataReadResponse> GetMultiData(DataReadRequest request, ServerCallContext context)
     {
-        Dictionary<string, string> searchParameters = request.Key.ToList().ToDictionary(key => key, key => request.Value.ToArray()[request.Key.ToList().IndexOf(key)]);
-        var response = _repo.LoadDataAsync(request.Collection, searchParameters);
+        List<BsonDocument> response;
+        if (request.IntegerParameters.Capacity <= 0)
+        {
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, stringParameters);
+        }
+        else if (request.StringParameters.Capacity <= 0)
+        {
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, integerParameters);
+        }
+
+        else
+        {
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection,stringParameters, integerParameters);
+        }
         return await Task.FromResult(new MultiDataReadResponse
         {
-            Value = { response.Select(x => x.ToString()) }
+            Value = {response.Select(x=>x.ToString())}
         });
     }
     public override async Task<SingleDataWriteResponse> SetSingleData(SingleDataWriteRequest request, ServerCallContext context)
