@@ -1,7 +1,5 @@
-using System.Reflection.Metadata;
 using DataAccess;
 using DataAccess.Contracts;
-using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Hive.Protocol;
 using MongoDB.Bson;
