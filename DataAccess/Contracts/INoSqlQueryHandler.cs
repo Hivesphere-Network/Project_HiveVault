@@ -1,8 +1,12 @@
-﻿namespace DataAccess.Contracts;
+﻿using MongoDB.Bson;
 
+namespace DataAccess.Contracts;
 
 public interface INoSqlQueryHandler
 {
-    Task<IEnumerable<T>> LoadDataAsync<T, U>(string collectionName, U parameters);
-    Task SaveDataAsync<T>(string collectionName, T parameters);
+    public List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, string> stringParameters, Dictionary<string, long> intParameters);
+    public List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, string> stringParameters);
+    public List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, long> intParameters);
+
+    Task SaveDataAsync(string collectionName, BsonDocument document);
 }

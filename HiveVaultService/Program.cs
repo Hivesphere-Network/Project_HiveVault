@@ -7,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration["serverID"] = Guid.NewGuid().ToString();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(options =>
+{
+    options.MaxReceiveMessageSize = 100 * 1024 * 1024;
+    options.MaxSendMessageSize = 100 * 1024 * 1024;
+});
 builder.Services.AddSingleton<ISqlQueryHandler, SqlQueryHandler>();
 builder.Services.AddSingleton<INoSqlQueryHandler, NoSqlQueryHandler>();
 builder.Services.AddSingleton<IGraphQueryHandler, GraphQueryHandler>();
@@ -20,5 +24,6 @@ app.UseHttpsRedirection();
 
 app.MapGrpcService<HiveHandshakeService>();
 app.MapGrpcService<HiveGraphDataService>();
+app.MapGrpcService<HiveNoSqlDataService>();
 
 app.Run();

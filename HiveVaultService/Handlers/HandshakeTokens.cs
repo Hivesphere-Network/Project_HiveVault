@@ -2,7 +2,7 @@ namespace HiveVaultService.Handlers;
 
 public static class HandshakeTokens
 {
-    private static readonly Guid[] RequestIds = new Guid[1000];
+    private static Guid[] RequestIds = new Guid[1000];
 
     public static string GetToken()
     {
