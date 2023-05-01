@@ -47,7 +47,7 @@ public class NoSqlQueryHandler : INoSqlQueryHandler
         var result_list = collection.FindAsync(filter).Result.ToList();
         return result_list;
     }
-    
+
     public List<BsonDocument> LoadDataAsync(string collectionName, Dictionary<string, long> intParameters)
     {
         Debug.Assert(_database != null, nameof(_database) + " != null");

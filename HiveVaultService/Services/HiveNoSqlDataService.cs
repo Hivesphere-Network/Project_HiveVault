@@ -14,51 +14,51 @@ public class HiveNoSqlDataService : HiveNoSqlData.HiveNoSqlDataBase
         List<BsonDocument> response;
         if (request.IntegerParameters.Capacity <= 0)
         {
-            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
             response = _repo.LoadDataAsync(request.Collection, stringParameters);
         }
         else if (request.StringParameters.Capacity <= 0)
         {
-            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
             response = _repo.LoadDataAsync(request.Collection, integerParameters);
         }
 
         else
         {
-            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
-            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
-            response = _repo.LoadDataAsync(request.Collection,stringParameters, integerParameters);
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, stringParameters, integerParameters);
         }
-        
+
         return await Task.FromResult(new SingleDataReadResponse
         {
             Value = response.First().ToString()
         });
     }
-    
+
     public override async Task<MultiDataReadResponse> GetMultiData(DataReadRequest request, ServerCallContext context)
     {
         List<BsonDocument> response;
         if (request.IntegerParameters.Capacity <= 0)
         {
-            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
             response = _repo.LoadDataAsync(request.Collection, stringParameters);
         }
         else if (request.StringParameters.Capacity <= 0)
         {
-            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
             response = _repo.LoadDataAsync(request.Collection, integerParameters);
         }
 
         else
         {
-            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
-            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter=> parameter.Key, parameter => parameter.Value);
-            response = _repo.LoadDataAsync(request.Collection,stringParameters, integerParameters);
+            var stringParameters = request.StringParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
+            var integerParameters = request.IntegerParameters.ToList().ToDictionary(parameter => parameter.Key, parameter => parameter.Value);
+            response = _repo.LoadDataAsync(request.Collection, stringParameters, integerParameters);
         }
         return await Task.FromResult(new MultiDataReadResponse
         {
-            Value = {response.Select(x=>x.ToString())}
+            Value = { response.Select(x => x.ToString()) }
         });
     }
     public override async Task<SingleDataWriteResponse> SetSingleData(SingleDataWriteRequest request, ServerCallContext context)
