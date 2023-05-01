@@ -7,8 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY "HiveVaultService/HiveVaultService.csproj", "HiveVaultService/"]
-COPY "../DataAccess/DataAccess.csproj", "DataAccess/"]
+COPY ["/HiveVaultService/*.csproj", "HiveVaultService/"]
+COPY ["/DataAccess/*.csproj", "DataAccess/"]
+
 RUN dotnet restore "HiveVaultService/HiveVaultService.csproj"
 COPY . .
 WORKDIR "/src/HiveVaultService"
