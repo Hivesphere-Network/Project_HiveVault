@@ -18,11 +18,7 @@ builder.Services.AddSingleton<IGraphQueryHandler, GraphQueryHandler>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-app.MapGrpcService<HiveHandshakeService>();
+//Health Check Endpoints
 app.MapGrpcService<HiveGraphDataService>();
 app.MapGrpcService<HiveNoSqlDataService>();
 
