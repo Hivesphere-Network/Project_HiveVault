@@ -1,11 +1,8 @@
-name: Docker Hub Container Image Library Image Build
+name: Docker Image Build and Push
 
 on:
-  push:
-    branches: ['dev']
-
   pull_request:
-    branches: ['dev', 'qa', 'master']
+    branches: ['master']
 
 
 jobs:
@@ -31,11 +28,14 @@ jobs:
             type=raw,value=0.1.${{ github.run_number }},priority=1000
             type=ref,event=branch
             type=raw,value=latest
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
         with:
           context: .
+          file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/hivevaultservice:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/hivevaultservice:latest
           labels: ${{ steps.meta.outputs.labels }}
