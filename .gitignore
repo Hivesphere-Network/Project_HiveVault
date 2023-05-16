@@ -1,0 +1,16 @@
+﻿/.idea/
+/.vs/
+/.vscode/
+/HiveVaultService/obj/
+/HiveVaultService/bin/
+/HiveVaultService/.idea/
+/HiveVaultService.sln.DotSettings.user
+/DataAccess/obj/
+/DataAccess/bin/
+/DataAccess.sln.DotSettings.usergit
+/SqlDB/obj/
+/SqlDB/bin/
+*.dbmdl
+Project_HiveVault.sln.DotSettings.user
+HiveVaultService/HiveVault_API.csproj.user
+/OpenApi/
