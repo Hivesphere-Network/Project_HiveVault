@@ -12,30 +12,22 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
+      - name: Install Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker.io -y
+
       - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESSTOKEN }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESSTOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ secrets.DOCKER_USERNAME }}/hivevaultservice
-          tags: type=raw,value=0.1.${{ github.run_number }},priority=1000
+        run: |
+          echo "::set-output name=labels::type=raw,value=0.1.${{ github.run_number }},priority=1000,type=ref,event=branch,type=raw,value=latest"
 
       - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: pramudithapothuwila/hivevaultservice:latest
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: my-artifact
-
-      - name: Display structure of downloaded files
-        run: ls -R
+        run: |
+          docker build -t pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }} .
+          docker push pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }}
+          docker tag pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }} pramudithapothuwila/hivevaultservice:latest
+          docker push pramudithapothuwila/hivevaultservice:latest
