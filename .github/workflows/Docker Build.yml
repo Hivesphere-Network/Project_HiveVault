@@ -14,7 +14,9 @@ jobs:
 
       - name: Install Docker
         run: |
+          sudo apt-get remove moby-containerd moby-runc -y
           sudo apt-get update
+          sudo apt-get upgrade
           sudo apt-get install docker.io -y
 
       - name: Log in to Docker Hub
