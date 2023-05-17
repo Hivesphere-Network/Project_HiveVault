@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: $DOCKER_USERNAME/hivevaultservice
+          images: pramudithapothuwila/hivevaultservice
           tags: |
             type=raw,value=0.1.${{ github.run_number }},priority=1000
             type=ref,event=branch
@@ -36,8 +36,8 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: |
-            $DOCKER_USERNAME/hivevaultservice:${{ steps.vars.outputs.tag }}
-            $DOCKER_USERNAME/hivevaultservice:latest
+            pramudithapothuwila/hivevaultservice:${{ steps.vars.outputs.tag }}
+            pramudithapothuwila/hivevaultservice:latest
           labels: ${{ steps.meta.outputs.labels }}
 
       - uses: actions/download-artifact@v3
