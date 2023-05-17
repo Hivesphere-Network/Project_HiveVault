@@ -20,8 +20,7 @@ HiveVault provides a number of features to help organizations manage their data 
 HiveVault uses GitHub Actions for continuous integration and deployment. The following are the current status of the workflows:  
 
 Build:
-    [![GitHub Container Registry Image Build](https://github.com/PramudithaPothuwila/HiveVault/actions/workflows/container-registry-publish.yml/badge.svg?branch=dev)](https://github.com/PramudithaPothuwila/HiveVault/actions/workflows/container-registry-publish.yml)
-    [![Docker Hub Container Image Library Image Build](https://github.com/PramudithaPothuwila/HiveVault/actions/workflows/docker-hub-publish.yml/badge.svg)](https://github.com/PramudithaPothuwila/HiveVault/actions/workflows/docker-hub-publish.yml)  
+    [![Docker Image Build](https://github.com/Hivesphere-Network/Project_HiveVault/actions/workflows/Docker%20Build%20and%20Push.yml/badge.svg?branch=master)](https://github.com/Hivesphere-Network/Project_HiveVault/actions/workflows/Docker%20Build%20and%20Push.yml)
 Tests:   
 Deploy:
 
