@@ -29,7 +29,5 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build -t pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }} .
-          docker push pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }}
-          docker tag pramudithapothuwila/hivevaultservice:${{ steps.meta.outputs.labels }} pramudithapothuwila/hivevaultservice:latest
+          docker build -t pramudithapothuwila/hivevaultservice:latest .
           docker push pramudithapothuwila/hivevaultservice:latest
