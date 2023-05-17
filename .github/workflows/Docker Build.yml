@@ -28,6 +28,13 @@ jobs:
             type=raw,value=0.1.${{ github.run_number }},priority=1000
             type=ref,event=branch
             type=raw,value=latest
+      
+      - uses: actions/download-artifact@v3
+        with:
+          name: my-artifact
+
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Build and push
         uses: docker/build-push-action@v4
