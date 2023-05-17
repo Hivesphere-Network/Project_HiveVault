@@ -1,9 +1,8 @@
 name: Docker Image Build and Push
 
 on:
-  pull_request:
+  push:
     branches: ['master']
-
 
 jobs:
   push_to_registry:
@@ -12,30 +11,40 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESSTOKEN }}
-      
-      - name: Extract metadata (tags, labels) for Docker
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v4
         with:
-          images: pramudithapothuwila/hivevault
+          images: ${{ vars.DOCKER_USERNAME }}/hivevaultservice
           tags: |
-            type=raw,value=0.1.${{ github.run_number }},priority=1000
+            type=schedule
             type=ref,event=branch
-            type=raw,value=latest
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile
           push: true
-          tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/hivevaultservice:${{ steps.vars.outputs.tag }}
-            ${{ secrets.DOCKER_HUB_USERNAME }}/hivevaultservice:latest
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
